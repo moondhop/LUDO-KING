@@ -313,3 +313,79 @@ button {
 .home-green {
   background-color: #5cb85c;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1a2744; /* Photo jaisa premium blue background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-width: 450px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.board-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Board ko hamesha square rakhega */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Puraane board aur canvas ko wrapper ke andar map karna */
+.board-wrapper .board, 
+.board-wrapper #gameBoard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.top-players, .bottom-players {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.player-profile {
+  width: 42%;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border: 3px solid #b3b3b3;
+  border-radius: 12px;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Turn highlight hone par glow effect */
+.player-profile.active {
+  border-color: #ffcc00;
+  box-shadow: 0 0 15px #ffcc00;
+}
+
+/* White dice look */
+.dice-button {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+}
