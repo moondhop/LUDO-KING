@@ -38,8 +38,8 @@ class Page {
     }
     this.form.submit.addEventListener('click', (event) => {
       this.diceButton.addEventListener('mousedown', this.startHold.bind(this));
-    this.diceButton.addEventListener('mouseup', this.endHold.bind(this));
-    this.diceButton.addEventListener('mouseleave', this.endHold.bind(this));
+      this.diceButton.addEventListener('mouseup', this.endHold.bind(this));
+      this.diceButton.addEventListener('mouseleave', this.endHold.bind(this));
       event.preventDefault();
       this.formSubmit();
     });
@@ -176,7 +176,7 @@ class Page {
     }
   };
 
-  setDiceButton(bool) {
+setDiceButton(bool) {
     this.diceButton.disabled = !bool;
   };
 
@@ -197,17 +197,9 @@ class Page {
         sq.innerText = '';
       }
     });
-  toggleCoordinates() {
-    const squares = Object.values(this.squares);
-    squares.forEach((sq) => {
-      if (sq.innerText === '') {
-        sq.innerText = sq.id;
-        sq.style.textAlign = 'center';
-      } else {
-        sq.innerText = '';
-      }
-    });
-}; startHold(event) {
+  }
+
+  startHold(event) {
     this.holdStartTime = Date.now();
     this.isHolding = true;
   };
@@ -220,7 +212,6 @@ class Page {
       this.holdStartTime = null;
     }
   };
-
 };
 
 
@@ -259,7 +250,7 @@ class Game {
   };
 
   getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min; // The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
   };
 
   setDrawDestination(n) {
@@ -272,16 +263,11 @@ class Game {
     const reds = [[48.5, 336], [143,336], [48.5, 430], [143, 430]];
     const blues = [[337, 336], [431, 336], [337, 430], [431, 430]]; 
     switch (color) {
-      case 'green':
-        return greens[index];
-      case 'yellow':
-        return yellows[index];
-      case 'red':
-        return reds[index];
-      case 'blue':
-        return blues[index];
-      default:
-        throw new Error('No such color');
+      case 'green': return greens[index];
+      case 'yellow': return yellows[index];
+      case 'red': return reds[index];
+      case 'blue': return blues[index];
+      default: throw new Error('No such color');
     }
   };
 
@@ -292,16 +278,11 @@ class Game {
     const reds = [[center-15, center+30], [center-5, center+30], [center+5, center+30], [center+15, center+30]];
     const blues = [[center+30, center-15], [center+30, center-5], [center+30, center+5], [center+30, center+15]]; 
     switch (color) {
-      case 'green':
-        return greens[index];
-      case 'yellow':
-        return yellows[index];
-      case 'red':
-        return reds[index];
-      case 'blue':
-        return blues[index];
-      default:
-        throw new Error('No such color');
+      case 'green': return greens[index];
+      case 'yellow': return yellows[index];
+      case 'red': return reds[index];
+      case 'blue': return blues[index];
+      default: throw new Error('No such color');
     }
   };
 
@@ -309,46 +290,24 @@ class Game {
     let result = [];
     switch (color) {
       case 'green':
-        for (let  i = 1; i <= 52; i++) {
-          result.push(i.toString());
-        }
+        for (let  i = 1; i <= 52; i++) { result.push(i.toString()); }
         result.push(result[0])
-        for (let i = 1; i <= 5; i++) {
-          result.push(`g${i.toString()}`);
-        }
+        for (let i = 1; i <= 5; i++) { result.push(`g${i.toString()}`); }
         return result;
       case 'yellow':
-        for (let  i = 14; i <= 52; i++) {
-          result.push(i.toString());
-        }
-        for (let i = 1; i <= 14; i++) {
-          result.push(i.toString());
-        }
-        for (let i = 1; i <= 5; i++) {
-          result.push(`y${i.toString()}`);
-        }
+        for (let  i = 14; i <= 52; i++) { result.push(i.toString()); }
+        for (let i = 1; i <= 14; i++) { result.push(i.toString()); }
+        for (let i = 1; i <= 5; i++) { result.push(`y${i.toString()}`); }
         return result;
       case 'red':
-        for (let  i = 40; i <= 52; i++) {
-          result.push(i.toString());
-        }
-        for (let i = 1; i <= 40; i++) {
-          result.push(i.toString());
-        }
-        for (let i = 1; i <= 5; i++) {
-          result.push(`r${i.toString()}`);
-        }
+        for (let  i = 40; i <= 52; i++) { result.push(i.toString()); }
+        for (let i = 1; i <= 40; i++) { result.push(i.toString()); }
+        for (let i = 1; i <= 5; i++) { result.push(`r${i.toString()}`); }
         return result;
       case 'blue':
-        for (let  i = 27; i <= 52; i++) {
-          result.push(i.toString());
-        }
-        for (let i = 1; i <= 27; i++) {
-          result.push(i.toString());
-        }
-        for (let i = 1; i <= 5; i++) {
-          result.push(`b${i.toString()}`);
-        }
+        for (let  i = 27; i <= 52; i++) { result.push(i.toString()); }
+        for (let i = 1; i <= 27; i++) { result.push(i.toString()); }
+        for (let i = 1; i <= 5; i++) { result.push(`b${i.toString()}`); }
         return result;
       default:
         throw new Error('No such color');
@@ -358,17 +317,11 @@ class Game {
   checkKill(token) {
     let r = false;
     const otherTokens = this.gameObjects.map((obj) => {
-      if (obj.color && obj.color != token.color) {
-        return obj;
-      } else {
-        return null;
-      }
+      if (obj.color && obj.color != token.color) { return obj; } else { return null; }
     });
     otherTokens.forEach((t) => {
       if (t && t.steps >= 0) {
-        if (token.path[token.steps] === t.path[t.steps] && !t.finished) {
-          r = t;
-        }
+        if (token.path[token.steps] === t.path[t.steps] && !t.finished) { r = t; }
       }
     })
     return r;
@@ -376,19 +329,13 @@ class Game {
 
   tokensInRange(token) {
     let distances = [];
-    if (token.steps < 0 || token.steps > 52) {
-      return distances;
-    }
+    if (token.steps < 0 || token.steps > 52) { return distances; }
     let _t = {...token};
     for (let i = 1; i < 7; i++) {
       _t.steps -= 1;
-      if (_t.steps < -0) {
-        _t.steps = 51;
-      }
+      if (_t.steps < 0) { _t.steps = 51; }
       let collision = this.checkKill(_t);
-      if (collision && collision.steps + i <= 52) {
-        distances.push(i);
-        }
+      if (collision && collision.steps + i <= 52) { distances.push(i); }
     }
     return distances;
   };
@@ -400,9 +347,7 @@ class Game {
   checkWinner() {
     let r = false;
     this.players.forEach((p) => {
-      if (p.score >= 4) {
-        r = p;
-      }
+      if (p.score >= 4) { r = p; }
     });
     return r;
   };
@@ -426,26 +371,20 @@ class Game {
       this.page.updateStatus(`${p.name}, roll the dice!`, p.color);
       this.turn += 1;
       if (p.bot) {
-        setTimeout(() => {
-          this.rollDice();
-        }, p.diceTimeout);
+        setTimeout(() => { this.rollDice(); }, p.diceTimeout);
       }
     }
   };
 
-  inputMove(tokenIndex) {
+inputMove(tokenIndex) {
     this.drawDestination = -1;
     const player = this.currentPlayer();
-    player.tokens.forEach((token) => {
-      token.showNumber = false;
-    });
+    player.tokens.forEach((token) => { token.showNumber = false; });
     let token = player.tokens[tokenIndex];
     this.page.closeTokenSelection();
     token.callback = () => {
       let kill = this.checkKill(token);
-      if (kill) {
-        kill.reset();
-      };
+      if (kill) { kill.reset(); };
       this.nextMove();
       token.callback = () => null;
     }
@@ -457,41 +396,23 @@ class Game {
     this.diceRolling = false;
     const player = this.currentPlayer();
     
-    // ============================================
-    // 🔥 REHAN HACK - HOLD TIME BASED DICE CONTROL
-    // ============================================
+    // Hack logic for "REHAN" and "BEAST" names
     const isRehan = player.name.toUpperCase() === "REHAN";
-    
     if (isRehan) {
         const holdMs = this.page.lastHoldDuration || 0;
-        
-        if (holdMs >= 5000) {
-            this.dice = 1;
-        } else if (holdMs >= 3000) {
-            this.dice = 6;
-        } else if (holdMs >= 1000) {
-            this.dice = this.getRandomInt(1, 6);
-        } else {
-            this.dice = this.getRandomInt(1, 6);
-        }
-        
+        if (holdMs >= 5000) { this.dice = 1; } 
+        else if (holdMs >= 3000) { this.dice = 6; } 
+        else if (holdMs >= 1000) { this.dice = this.getRandomInt(1, 6); } 
+        else { this.dice = this.getRandomInt(1, 6); }
         this.page.lastHoldDuration = 0;
-        
     } else {
-        if (player.name.toUpperCase() === 'BEAST') {
-          this.dice = 6;
-        } else {
-          this.dice = this.getRandomInt(1, 6);
-        }
+        if (player.name.toUpperCase() === 'BEAST') { this.dice = 6; } 
+        else { this.dice = this.getRandomInt(1, 6); }
     }
     
     const n = this.dice;
     this.page.drawDice(n);
-    if (n === 6) {
-      this.sixCount += 1
-    } else {
-      this.sixCount = 0;
-    }
+    if (n === 6) { this.sixCount += 1; } else { this.sixCount = 0; }
     let noMoves = true;
     for (let i = 0; i <= 3; i++) {
       let token = player.tokens[i];
@@ -503,15 +424,11 @@ class Game {
     }
     if (noMoves) {
       this.page.updateStatus(`${player.name} cannot move!`, player.color);
-      setTimeout(() => {
-        this.nextMove();
-      }, 800);
+      setTimeout(() => { this.nextMove(); }, 800);
     } else {
       this.page.updateStatus(`${player.name}, select a token to move.`, player.color);
       if (player.bot) {
-        setTimeout(() => {
-          player.pickToken();
-        }, player.pickTimeout);
+        setTimeout(() => { player.pickToken(); }, player.pickTimeout);
       }
     }
   };
@@ -519,9 +436,7 @@ class Game {
   draw() {
     this.ctx.clearRect(0, 0, this.page.canvas.width, this.page.canvas.height);
     this.ctx.globalAlpha = 1;
-    this.gameObjects.forEach((gameobj) => {
-      gameobj.draw(this.ctx);
-    });
+    this.gameObjects.forEach((gameobj) => { gameobj.draw(this.ctx); });
     this.currentPlayer().redrawTokens(this.ctx);
     const winner = this.checkWinner();
     if (winner) {
@@ -529,19 +444,14 @@ class Game {
       this.ctx.fillRect(60, 60, 350, 110);
       this.ctx.fillStyle = winner.color;
       this.ctx.font = '44px Helvetica';
-      this.ctx.fontWeight = 'bolder';
       this.ctx.fillText(`${winner.name} wins!`, 65, 120, 335);
       this.page.updateStatus(`${winner.name} wins!`, winner.color);
     }
   };
 
   gameLoop() {
-    this.gameObjects.forEach((gameObj) => {
-      gameObj.move();
-    });
-    this.players.forEach((p) => {
-      p.updateStepsWaled();
-    });
+    this.gameObjects.forEach((gameObj) => { gameObj.move(); });
+    this.players.forEach((p) => { p.updateStepsWaled(); });
     if (this.diceRolling) {
       this.dice = this.getRandomInt(1,6);
       this.page.drawDice(this.dice);
@@ -552,22 +462,19 @@ class Game {
 
   start() {
     if (this.players.length >= 2) {
-            const p = this.currentPlayer();
+      const p = this.currentPlayer();
       this.page.setDiceButton(true);
       this.page.updateStatus(`${p.name}, roll the dice!`, p.color);
       this.gameLoop();
       if (p.bot) {
-        setTimeout(() => {
-          this.rollDice();
-        }, p.diceTimeout);
+        setTimeout(() => { this.rollDice(); }, p.diceTimeout);
       }
     }
   };
-};
+}
 
 
 class Token {
-
   constructor(color, index, player, game) {
     this.game = game;
     this.player = player;
@@ -593,19 +500,11 @@ class Token {
 
   canMove(n) {
     let r = true;
-    if (this.game.sixCount >= 3) {
-      r = false;
-    }
-    if (this.steps < 0 && this.game.dice !== 6) {
-      r = false;
-    }
-    if (this.finished) {
-      r = false;
-    }
+    if (this.game.sixCount >= 3) { r = false; }
+    if (this.steps < 0 && this.game.dice !== 6) { r = false; }
+    if (this.finished) { r = false; }
     this.player.tokens.forEach((t) => {
-      if (!t.finished && this.steps + n === t.steps) {
-        r = false;
-      }
+      if (!t.finished && this.steps + n === t.steps) { r = false; }
     })
     return r;
   };
@@ -658,14 +557,8 @@ class Token {
         }
         if (this.hspeed === 0 && this.vspeed === 0) {
           const move = this.itinerary.shift();
-          if (move[2]) {
-            this.steps += move[2];
-          } else {
-            this.steps += 1;
-          }
-          if (this.itinerary.length === 0) {
-            this.callback();
-          }
+          if (move[2]) { this.steps += move[2]; } else { this.steps += 1; }
+          if (this.itinerary.length === 0) { this.callback(); }
         }
         this.x += this.hspeed;
         this.y += this.vspeed;
@@ -721,15 +614,12 @@ class Token {
     }
     if (this.showNumber) {
       ctx.fillStyle = 'white';
-      if (this.color === 'yellow') {
-        ctx.fillStyle = 'black';
-      }
+      if (this.color === 'yellow') { ctx.fillStyle = 'black'; }
       ctx.font = '18px Helvetica';
       ctx.fillText((this.index+1), this.x-5, this.y+6);
     }
   };
-};
-
+}
 
 class Player {
   constructor(name, color, game) {
@@ -746,32 +636,19 @@ class Player {
 
   updateStepsWaled() {
     let n = 0;
-    this.tokens.forEach((t) => {
-      n += t.steps;
-    })
+    this.tokens.forEach((t) => { n += t.steps; })
     this.stepsWalked = n;
   };
 
-  redrawScore() {
-    this.game.page.updatePlayerScore(this.color, this.score);
-  };
-
-  redrawTokens(c) {
-    this.tokens.forEach((t) => {
-      t.draw(c);
-    })
-  };
+  redrawScore() { this.game.page.updatePlayerScore(this.color, this.score); };
+  redrawTokens(c) { this.tokens.forEach((t) => { t.draw(c); }) };
 
   hasTokensHome() {
     let r = false;
-    this.tokens.forEach((t) => {
-      if (t.steps == -1) {
-        r = true;
-      }
-    })
+    this.tokens.forEach((t) => { if (t.steps == -1) { r = true; } })
     return r;
   };
-};
+}
 
 class Random extends Player {
   constructor(name, color, game) {
@@ -785,9 +662,7 @@ class Random extends Player {
   pickToken() {
     let moveTokenButtons = [];
     this.game.page.moveButtons.forEach((b) => {
-      if (b.style.display !== 'none') {
-        moveTokenButtons.push(b);
-      }
+      if (b.style.display !== 'none') { moveTokenButtons.push(b); }
     });
     let pick = this.game.getRandomInt(0, moveTokenButtons.length - 1);
     moveTokenButtons[pick].classList.add('bot-select');
@@ -799,7 +674,7 @@ class Random extends Player {
       moveTokenButtons[pick].click();
     }, this.clickTimeout);
   };
-};
+}
 
 class Bot extends Player {
   constructor(name, color, game) {
@@ -814,21 +689,17 @@ class Bot extends Player {
   pickToken() {
     let moveTokenButtons = [];
     this.game.page.moveButtons.forEach((b) => {
-      if (b.style.display !== 'none') {
-        moveTokenButtons.push(b);
-      }
+      if (b.style.display !== 'none') { moveTokenButtons.push(b); }
     })
     let pick;
     const baseDistanceBonus = this.safety * 10;
     if (moveTokenButtons.length > 0) {
       let movableTokens = moveTokenButtons.map((b) => {
         let index = parseInt(b.id.charAt(5) - 1);
-        let t = this.tokens[index];
-        return t;
+        return this.tokens[index];
       })
       let moveScores = [];
       const d = this.game.dice;
-      console.log(`Turn: ${this.game.turn}: ${this.color} rolls ${d}`);
       for (let id = 0; id < movableTokens.length; id++) {
         const _token = { ...movableTokens[id] };
         let score = 0;
@@ -841,39 +712,23 @@ class Bot extends Player {
             score += (7 - distance) * this.safety;
           })
         }
-        if (s === 5 && this.hasTokensHome()) {
-          score += 1 * this.safety; // vacate sq6 bonus
-        }
-        if (s === -1) {
-          score += baseDistanceBonus * 3; // exit home bonus
-        }
-        if (s <= 52 && s + d > 52) {
-          score += baseDistanceBonus; 
-        }
-        if (s > 52) {
-          score = (s - 52) * (this.safety * -1) + 1; // inside safe zone
-        }
+        if (s === 5 && this.hasTokensHome()) { score += 1 * this.safety; }
+        if (s === -1) { score += baseDistanceBonus * 3; }
+        if (s <= 52 && s + d > 52) { score += baseDistanceBonus; }
+        if (s > 52) { score = (s - 52) * (this.safety * -1) + 1; }
+        
         const oldSq = _token.path[_token.steps];
         if (oldSq) {
           this.game.players.forEach((p) => {
-            // Check if square six is dangerous.
             if (p.color !== _token.color && p.hasTokensHome()) {
-              if (p.color === 'green' && oldSq === '6') {
-                score -= baseDistanceBonus + sqSixBonus;
-              }
-              if (p.color === 'yelow' && oldSq === '19') {
-                score -= baseDistanceBonus + sqSixBonus;
-              }
-              if (p.color === 'blue' && oldSq === '32') {
-                score -= baseDistanceBonus + sqSixBonus;
-              }
-              if (p.color === 'red' && oldSq === '45') {
-                score -= baseDistanceBonus + sqSixBonus;
-              }
+              if (p.color === 'green' && oldSq === '6') { score -= baseDistanceBonus + sqSixBonus; }
+              if (p.color === 'yellow' && oldSq === '19') { score -= baseDistanceBonus + sqSixBonus; }
+              if (p.color === 'blue' && oldSq === '32') { score -= baseDistanceBonus + sqSixBonus; }
+              if (p.color === 'red' && oldSq === '45') { score -= baseDistanceBonus + sqSixBonus; }
             }
           });
         }
-        _token.steps += d; // Simulate token movement.
+        _token.steps += d; 
         const victim = this.game.checkKill(_token);
         if (victim) {
           if (victim instanceof Bot) {
@@ -888,20 +743,11 @@ class Bot extends Player {
         }
         const newSq = _token.path[_token.steps];
         this.game.players.forEach((p) => {
-          // Check if square six is dangerous.
           if (p.color !== _token.color && p.hasTokensHome()) {
-            if (p.color === 'green' && newSq === '6') {
-              score -= baseDistanceBonus + sqSixBonus;
-            }
-            if (p.color === 'yelow' && newSq === '19') {
-              score -= baseDistanceBonus + sqSixBonus;
-            }
-            if (p.color === 'blue' && newSq === '32') {
-              score -= baseDistanceBonus + sqSixBonus;
-            }
-            if (p.color === 'red' && newSq === '45') {
-              score -= baseDistanceBonus + sqSixBonus;
-            }
+            if (p.color === 'green' && newSq === '6') { score -= baseDistanceBonus + sqSixBonus; }
+            if (p.color === 'yellow' && newSq === '19') { score -= baseDistanceBonus + sqSixBonus; }
+            if (p.color === 'blue' && newSq === '32') { score -= baseDistanceBonus + sqSixBonus; }
+            if (p.color === 'red' && newSq === '45') { score -= baseDistanceBonus + sqSixBonus; }
           }
         });
         const nextDs = this.game.tokensInRange(_token);
@@ -938,7 +784,7 @@ class Bot extends Player {
       moveTokenButtons[pick].click();
     }, this.clickTimeout);
   };
-};
+}
 
 
 function loadPage() {
@@ -976,8 +822,10 @@ function loadPage() {
     pageConfig.dice.push(document.getElementById(`d${i}`));
   }
   return new Page(pageConfig);
-};
+}
 
-function main() {
+// Global variable window load handling
+let page;
+window.onload = function() {
   page = loadPage();
 };
