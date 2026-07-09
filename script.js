@@ -1,3 +1,6 @@
+const diceSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav'); // Dice roll sound
+const moveSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav'); // Token move sound
+
 class Page {
 
   constructor(
@@ -45,30 +48,26 @@ class Page {
     });
   };
 
-  formValid() {
-    let n_players = 0;
-    let colors = {
-      'red': 0,
-      'green': 0,
-      'blue': 0,
-      'yellow': 0
-    };
-    this.form.data.forEach((p) => {
-      if (p.name.length > 0) {
-        n_players += 1;
-        colors[p.color] += 1;
-      }
-    });
-    if (n_players >= 2) {
-      if (colors['red'] < 2 && colors['green'] < 2 && colors['blue'] < 2 && colors['yellow'] < 2) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
+   formValid() {
+  let n_players = 0;
+  let allowedPlayers = parseInt(this.options.totalPlayers.value); // Select kiya hua number
+  let colors = { 'red': 0, 'green': 0, 'blue': 0, 'yellow': 0 };
+  
+  this.form.data.forEach((p) => {
+    if (p.name.length > 0) {
+      n_players += 1;
+      colors[p.color] += 1;
     }
-  };
+  });
+
+  // Jitne player select kiye hain, exact utne hi naam hone chahiye
+  if (n_players === allowedPlayers) {
+    if (colors['red'] < 2 && colors['green'] < 2 && colors['blue'] < 2 && colors['yellow'] < 2) {
+      return true;
+    }
+  }
+  return false;
+}
 
   updateFormPlayer(i) {
     const name = this.form.playerNames[i];
@@ -392,6 +391,7 @@ inputMove(tokenIndex) {
   };
 
   rollDice() {
+    diceSound.play();
     this.page.setDiceButton(false);
     this.diceRolling = false;
     const player = this.currentPlayer();
@@ -808,7 +808,7 @@ function loadPage() {
     moveScoreTitle: document.getElementsByClassName('move-title')[0],
     moveScore: document.getElementById('move-score'),
     options: {
-      showCoordinates: document.getElementById('show-coordinates')
+      totalPlayers: document.getElementById('total-players')
     }
   };
   for (let i = 0; i < 4; i ++) {
