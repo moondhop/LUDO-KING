@@ -75,7 +75,7 @@ class Page {
     const color = this.form.playerColors[i];
     const head = this.form.playerHeaders[i];
     this.form.data[i].name = name.value;
-    this.form.data[i].color = color.value;
+    this.form.data[i].color = color.value.toLowerCase();
     this.form.submit.disabled = !this.formValid();
     head.classList.remove('score-red', 'score-yellow', 'score-green', 'score-blue');
     head.classList.add(`score-${color.value}`);
