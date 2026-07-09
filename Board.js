@@ -78,5 +78,6 @@ function drawBoard() {
     drawHome(9, 9, "#ffcc00");
 
     drawCenter();
-
+    drawTokens();
+    
 }
